@@ -10,7 +10,6 @@ const WelcomeScreen = (props) => {
       style={styles.background}
       source={require("../images/mail.jpg")}
     >
-      <HomeScreen />
       <TouchableHighlight
         style={styles.loginBtn}
         onPress={() => navigation.navigate("Log In")}

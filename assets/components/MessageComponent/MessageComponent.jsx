@@ -41,12 +41,13 @@ const MessageComponent = (props) => {
 };
 
 const styles = StyleSheet.create({
-  avatar: {
-    paddingRight: 5,
-  },
+  avatar: {},
   dateCreated: {
     alignSelf: "flex-end",
     flexDirection: "row",
+  },
+  message: {
+    alignSelf: "center",
   },
   date: {
     fontSize: 8,
@@ -54,18 +55,16 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
   },
   container: {
-    height: "42%",
     width: "90%",
     flexWrap: "nowrap",
-    marginTop: 5,
     backgroundColor: "#e9d4b7",
     borderRadius: 15,
     flexDirection: "column",
     borderWidth: 1,
-    padding: 15,
-    margin: 15,
-    marginBottom: 0,
+    padding: 3,
+    margin: 3,
     alignItems: "flex-start",
+    alignSelf: "center",
   },
   likeBtn: {
     alignSelf: "center",
