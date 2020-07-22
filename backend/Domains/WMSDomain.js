@@ -3,21 +3,35 @@ const Schema = mongoose.Schema;
 
 const WMSSchema = new Schema(
   {
-    date: {
-      type: String,
-      required: false,
-    },
-    title: {
+    firstName: {
       type: String,
       required: true,
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      trim: true,
     },
     message: {
       type: String,
       required: true,
+      trim: true,
     },
     liked: {
-      type: Boolean,
+      type: Number,
       required: false,
+      trim: true,
+    },
+    userName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    userKey: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "UserDomain",
     },
   },
   {
@@ -28,27 +42,3 @@ const WMSSchema = new Schema(
 const WMSDomain = mongoose.model("WMSDomain", WMSSchema);
 
 module.exports = WMSDomain;
-
-const UserSchema = new Schema(
-  {
-    userName: {
-      type: String,
-      required: true,
-      trim: true,
-      minlength: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      trim: true,
-      minlength: 3,
-    },
-  },
-  {
-    timestamps: true,
-  }
-);
-
-const UserDomain = mongoose.model("UserDomain", UserSchema);
-
-module.exports = UserDomain;
