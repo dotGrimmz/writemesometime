@@ -16,7 +16,6 @@ const LoginScreen = (props) => {
     };
     try {
       await service.authenticateCredentials(credentials).then((response) => {
-        console.log(response);
         response.data.createdAt
           ? navigation.reset({
               index: 0,

@@ -1,20 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import React, { useState, useEffect, useContext } from "react";
+import { View, Text, FlatList } from "react-native";
 import WMSService from "../service/WMSService";
+import MessageComponent from "../components/MessageComponent/MessageComponent";
+import { UserContext } from "../context/UserContext";
 
 const service = new WMSService();
 
 const PostsScreen = (props) => {
   const [userPosts, setUserPosts] = useState([]);
+  const { setAvatarInitials, userCredentials } = useContext(UserContext);
 
   useEffect(() => {
-    fetchUserPosts = async () => {
-      let response = service.getAllUsersPosts(id);
+    const fetchUserPosts = async () => {
+      console.log("this is the id", userCredentials._id);
+      let response = await service.getAllUsersPosts(userCredentials._id);
+      console.log("all users posts", response.data);
+      setUserPosts(response.data);
     };
-  });
+    fetchUserPosts();
+  }, [service]);
   return (
     <View>
-      <Text> This is the User Posts Scree </Text>
+      <Text> This is the User Posts Screen</Text>
       <FlatList
         data={userPosts}
         keyExtractor={(item) => item._id}

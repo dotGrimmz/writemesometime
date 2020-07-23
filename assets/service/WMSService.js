@@ -13,8 +13,8 @@ class WMSService {
     return axios.get("http://localhost:5000/wmsapp/");
   }
 
-  getAllUsersPosts() {
-    return axios.get("http://localhost:5000/wmsapp/" + id);
+  getAllUsersPosts(id) {
+    return axios.get(`http://localhost:5000/wmsapp/${id}`);
   }
 }
 

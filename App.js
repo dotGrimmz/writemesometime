@@ -12,20 +12,21 @@ import PostsScreen from "./assets/screens/PostsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { UserContext } from "./assets/context/UserContext";
 const App = () => {
-  const [userCredentials, setUserCredentials] = useState({
-    userKey: "",
-    firstName: "",
-    lastName: "",
-  });
+  const [userCredentials, setUserCredentials] = useState();
+
+  const setAvatarInitials = (str) => {
+    let first = str.charAt(0) + str.charAt(str.length - 1).toUpperCase();
+    return first;
+  };
 
   const Stack = createStackNavigator();
   const MaterialBottomTabs = createBottomTabNavigator();
   const createHomeStack = () => {
     return (
-      <UserContext.Provider>
-        <MaterialBottomTabs.Navigator
-          value={{ userCredentials, setUserCredentials }}
-        >
+      <UserContext.Provider
+        value={{ userCredentials, setUserCredentials, setAvatarInitials }}
+      >
+        <MaterialBottomTabs.Navigator>
           <MaterialBottomTabs.Screen name="Home" component={HomeScreen} />
           <MaterialBottomTabs.Screen name="Create" component={CreateScreen} />
           <MaterialBottomTabs.Screen name="Profile" component={ProfileScreen} />
@@ -34,6 +35,8 @@ const App = () => {
       </UserContext.Provider>
     );
   };
+
+  console.log(userCredentials);
   return (
     <NavigationContainer>
       <UserContext.Provider value={{ userCredentials, setUserCredentials }}>

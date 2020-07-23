@@ -7,7 +7,7 @@ let service = new WMSService();
 
 const HomeScreen = (props) => {
   const [allPosts, setAllPosts] = useState([]);
-  // const { userCredentials } = useContext(UserContext);
+  const { setAvatarInitials } = useContext(UserContext);
 
   useEffect(() => {
     const fetchAllPosts = async () => {
@@ -17,10 +17,6 @@ const HomeScreen = (props) => {
     };
     fetchAllPosts();
   }, [service]);
-  const setAvatarInitials = (str) => {
-    let first = str.charAt(0) + str.charAt(str.length - 1).toUpperCase();
-    return first;
-  };
 
   return (
     <View>
