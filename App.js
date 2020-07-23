@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -12,6 +12,11 @@ import PostsScreen from "./assets/screens/PostsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const App = () => {
+  const [userCredentials, setUserCredentials] = useState({
+    userKey: "",
+    firstName: "",
+    lastName: "",
+  });
   const Stack = createStackNavigator();
   const MaterialBottomTabs = createBottomTabNavigator();
   const createHomeStack = () => {
@@ -26,7 +31,6 @@ const App = () => {
   };
   return (
     <NavigationContainer>
-      {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
       <Stack.Navigator>
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen

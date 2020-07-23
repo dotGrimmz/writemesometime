@@ -8,6 +8,14 @@ class WMSService {
   authenticateCredentials(body) {
     return axios.post("http://localhost:5000/wmsapp/login", body);
   }
+
+  getAllPosts() {
+    return axios.get("http://localhost:5000/wmsapp/");
+  }
+
+  getAllUsersPosts() {
+    return axios.get("http://localhost:5000/wmsapp/" + id);
+  }
 }
 
 export default WMSService;

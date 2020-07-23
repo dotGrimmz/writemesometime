@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Text, View, FlatList } from "react-native";
 import MessageComponent from "../components/MessageComponent/MessageComponent";
 import WMSService from "../service/WMSService";
+let service = new WMSService();
 
 const HomeScreen = (props) => {
   const [allPosts, setAllPosts] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchAllPosts = async () => {
-  //     await service.getAllPosts();
-  //   };
-  //   fetchAllPosts();
-  // }, [service]);
+  useEffect(() => {
+    const fetchAllPosts = async () => {
+      let response = await service.getAllPosts();
+      console.log(response.data);
+      setAllPosts(response.data);
+    };
+    fetchAllPosts();
+  }, [service]);
   const setAvatarInitials = (str) => {
     let first = str.charAt(0) + str.charAt(str.length - 1).toUpperCase();
     return first;
@@ -20,7 +23,7 @@ const HomeScreen = (props) => {
     <View>
       <Text> This is the HomeScreen</Text>
       <FlatList
-        data={mockData}
+        data={allPosts}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
           <MessageComponent

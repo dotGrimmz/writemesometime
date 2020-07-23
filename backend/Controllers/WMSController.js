@@ -3,7 +3,7 @@ const WMSService = require("../Service/WMSService.js");
 const service = new WMSService();
 
 router.route("/").get((req, res) => {
-  return service.getAllMessages(req, res);
+  return service.getAllPosts(req, res);
 });
 
 router.route("/:id").delete((req, res) => {
@@ -19,7 +19,7 @@ router.route("/login").post((req, res) => {
 });
 
 router.route("/:id").get((req, res) => {
-  return service.getAllUserMessages(req, res);
+  return service.getAllUserPosts(req, res);
 });
 
 router.route("/:id").post((req, res) => {

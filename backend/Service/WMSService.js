@@ -3,13 +3,13 @@ const UserDomain = require("../Domains/UserDomain");
 const mongoose = require("mongoose");
 
 class WMSService {
-  getAllMessages(req, res) {
+  getAllPosts(req, res) {
     WMSDomain.find()
-      .then((messages) => res.json(messages))
+      .then((messages) => res.send(messages))
       .catch((err) => res.status(400).json("Error: " + err));
   }
 
-  getAllUserMessages(req, res) {
+  getAllUserPosts(req, res) {
     const paramID = req.params.id;
     const userPosts = [];
 
@@ -138,6 +138,7 @@ class WMSService {
           if (user.userName === userName && user.password === password) {
             validated = true;
             userId = user._id;
+            res.status(200).send(user);
           } else if (user.userName === userName && user.password !== password) {
             wrongPassword = true;
           }
@@ -151,10 +152,6 @@ class WMSService {
               ? "Incorrect Password"
               : "User Does Not Exist",
           });
-        } else {
-          res
-            .status(200)
-            .send({ login: true, message: "User Logged In", userId: userId });
         }
       })
       .catch((err) => {

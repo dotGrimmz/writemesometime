@@ -6,8 +6,8 @@ const LoginScreen = (props) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const service = new WMSService();
-  const { navigation } = props;
-
+  const { navigation, setUserCredentials } = props;
+  console.log(props, "props in log in component ");
   const authenticateUser = async () => {
     let credentials = {
       userName,
@@ -15,12 +15,13 @@ const LoginScreen = (props) => {
     };
     try {
       await service.authenticateCredentials(credentials).then((response) => {
-        response.data.login
+        response.createdAt
           ? navigation.reset({
               index: 0,
               routes: [{ name: "Home" }],
             })
           : alert(response.data.message);
+        setUserCredentials({});
       });
     } catch (err) {
       console.log("Error message:", err);
