@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Text, View, FlatList } from "react-native";
 import MessageComponent from "../components/MessageComponent/MessageComponent";
 import WMSService from "../service/WMSService";
+import { UserContext } from "../context/UserContext";
 let service = new WMSService();
 
 const HomeScreen = (props) => {
   const [allPosts, setAllPosts] = useState([]);
+  // const { userCredentials } = useContext(UserContext);
 
   useEffect(() => {
     const fetchAllPosts = async () => {
@@ -19,6 +21,7 @@ const HomeScreen = (props) => {
     let first = str.charAt(0) + str.charAt(str.length - 1).toUpperCase();
     return first;
   };
+
   return (
     <View>
       <Text> This is the HomeScreen</Text>

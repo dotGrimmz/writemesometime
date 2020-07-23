@@ -10,49 +10,56 @@ import CreateScreen from "./assets/screens/CreateScreen";
 import ProfileScreen from "./assets/screens/ProfileScreen";
 import PostsScreen from "./assets/screens/PostsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
+import { UserContext } from "./assets/context/UserContext";
 const App = () => {
   const [userCredentials, setUserCredentials] = useState({
     userKey: "",
     firstName: "",
     lastName: "",
   });
+
   const Stack = createStackNavigator();
   const MaterialBottomTabs = createBottomTabNavigator();
   const createHomeStack = () => {
     return (
-      <MaterialBottomTabs.Navigator>
-        <MaterialBottomTabs.Screen name="Home" component={HomeScreen} />
-        <MaterialBottomTabs.Screen name="Create" component={CreateScreen} />
-        <MaterialBottomTabs.Screen name="Profile" component={ProfileScreen} />
-        <MaterialBottomTabs.Screen name="Posts" component={PostsScreen} />
-      </MaterialBottomTabs.Navigator>
+      <UserContext.Provider>
+        <MaterialBottomTabs.Navigator
+          value={{ userCredentials, setUserCredentials }}
+        >
+          <MaterialBottomTabs.Screen name="Home" component={HomeScreen} />
+          <MaterialBottomTabs.Screen name="Create" component={CreateScreen} />
+          <MaterialBottomTabs.Screen name="Profile" component={ProfileScreen} />
+          <MaterialBottomTabs.Screen name="Posts" component={PostsScreen} />
+        </MaterialBottomTabs.Navigator>
+      </UserContext.Provider>
     );
   };
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen
-          name="Log In"
-          options={{
-            title: "Log In",
-            headerStyle: { backgroundColor: "#e9d4b7" },
-            headerTintColor: "white",
-          }}
-          component={LoginScreen}
-        />
-        <Stack.Screen
-          name="Register"
-          options={{
-            title: "Register",
-            headerStyle: { backgroundColor: "#e9d4b7" },
-            headerTintColor: "white",
-          }}
-          component={RegisterScreen}
-        />
-        <Stack.Screen name="Home" children={createHomeStack} />
-      </Stack.Navigator>
+      <UserContext.Provider value={{ userCredentials, setUserCredentials }}>
+        <Stack.Navigator>
+          <Stack.Screen name="Welcome" component={WelcomeScreen} />
+          <Stack.Screen
+            name="Log In"
+            options={{
+              title: "Log In",
+              headerStyle: { backgroundColor: "#e9d4b7" },
+              headerTintColor: "white",
+            }}
+            component={LoginScreen}
+          />
+          <Stack.Screen
+            name="Register"
+            options={{
+              title: "Register",
+              headerStyle: { backgroundColor: "#e9d4b7" },
+              headerTintColor: "white",
+            }}
+            component={RegisterScreen}
+          />
+          <Stack.Screen name="Home" children={createHomeStack} />
+        </Stack.Navigator>
+      </UserContext.Provider>
     </NavigationContainer>
   );
 };

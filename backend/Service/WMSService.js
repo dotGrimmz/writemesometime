@@ -138,6 +138,7 @@ class WMSService {
           if (user.userName === userName && user.password === password) {
             validated = true;
             userId = user._id;
+            console.log("its a matching obj", user);
             res.status(200).send(user);
           } else if (user.userName === userName && user.password !== password) {
             wrongPassword = true;
