@@ -20,7 +20,7 @@ const WMSSchema = new Schema(
     },
     liked: {
       type: Number,
-      required: false,
+      required: true,
       trim: true,
     },
     userName: {

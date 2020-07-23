@@ -10,21 +10,35 @@ class WMSService {
   }
 
   getAllUserMessages(req, res) {
-    const userId = mongoose.Types.ObjectId(req.params.id);
+    const paramID = req.params.id;
     const userPosts = [];
+
+    // saving this block of code as a refrence for now
+    // UserDomain.find().then((accountOwners) => {
+    //   console.log(
+    //     "this should be ",
+    //     accountOwners[Object.keys(accountOwners)[2]].userName,
+    //     "account"
+    //   );
+    //   console.log(
+    //     "this should be rakeems Id ",
+    //     accountOwners[Object.keys(accountOwners)[2]]._id,
+    //     "and this should be true if the param passed is equal to the db userId. user id:",
+    //     userId,
+    //     accountOwners[Object.keys(accountOwners)[2]]._id == paramID
+    //   );
+    // });
+
     WMSDomain.find()
-      .then((users) => {
-        users.forEach((user) => {
-          if (user._id === userId) {
-            console.log("matching user id", user._id);
-            userPosts.push(user);
-          } else {
-            console.log("this user had no posts");
+      .then((posts) => {
+        posts.forEach((post) => {
+          if (post.userKey == paramID) {
+            userPosts.push(post);
           }
         });
       })
       .then(() => {
-        console.log("these should be all the users posts?", userPosts);
+        res.send(userPosts);
       })
       .catch((err) => res.status(400).json("Error:" + err));
   }
@@ -44,6 +58,8 @@ class WMSService {
       liked,
       userKey,
     });
+
+    console.log(newMessage);
 
     newMessage
       .save()
