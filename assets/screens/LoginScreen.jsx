@@ -28,7 +28,6 @@ const LoginScreen = (props) => {
       console.log("Error message:", err);
     }
   };
-  console.log(userCredentials, "should be user obj");
   return (
     <LoginComponent
       password={password}

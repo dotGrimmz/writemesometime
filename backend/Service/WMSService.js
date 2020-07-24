@@ -90,9 +90,13 @@ class WMSService {
   createNewUser(req, res) {
     const userName = req.body.userName;
     const password = req.body.password;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
     const newUser = new UserDomain({
       userName,
       password,
+      firstName,
+      lastName,
     });
     let existingUser = false;
     UserDomain.find()
@@ -108,10 +112,7 @@ class WMSService {
           newUser
             .save()
             .then(() => {
-              res.status(200).send({
-                created: true,
-                message: "User Saved",
-              });
+              this.authenticateUser(req, res);
             })
             .catch((err) => res.status(400).json("Error:" + err));
         } else {
@@ -138,7 +139,6 @@ class WMSService {
           if (user.userName === userName && user.password === password) {
             validated = true;
             userId = user._id;
-            console.log("its a matching obj", user);
             res.status(200).send(user);
           } else if (user.userName === userName && user.password !== password) {
             wrongPassword = true;

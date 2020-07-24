@@ -47,7 +47,6 @@ const App = () => {
     );
   };
 
-  console.log(userCredentials);
   return (
     <NavigationContainer>
       <UserContext.Provider

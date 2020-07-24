@@ -12,7 +12,6 @@ const HomeScreen = (props) => {
   useEffect(() => {
     const fetchAllPosts = async () => {
       let response = await service.getAllPosts();
-      console.log(response.data);
       setAllPosts(response.data);
     };
     fetchAllPosts();

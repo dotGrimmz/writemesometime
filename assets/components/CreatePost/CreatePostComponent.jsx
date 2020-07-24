@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 import { Avatar } from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
 
 const CreatePostComponent = (props) => {
-  const { setUserLoggedInUserAvatarInitials, usersPost, setUsersPost } = props;
+  const {
+    setUserLoggedInUserAvatarInitials,
+    usersPost,
+    setUsersPost,
+    submitPost,
+  } = props;
   const [lessThanFortyRemaining, setLessThanFortyRemaining] = useState(false);
 
   return (
@@ -30,6 +35,12 @@ const CreatePostComponent = (props) => {
           Dont write too much .. you only have {userPost.length - 140} left
         </Text>
       )}
+      <Button
+        style={styles.btn}
+        disabled={usersPost.length - 1 === 0}
+        title="sendPost"
+        onPress={() => submitPost()}
+      />
     </View>
   );
 };

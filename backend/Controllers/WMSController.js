@@ -22,7 +22,7 @@ router.route("/:id").get((req, res) => {
   return service.getAllUserPosts(req, res);
 });
 
-router.route("/:id").post((req, res) => {
+router.route("/newpost/:id").post((req, res) => {
   return service.postMessage(req, res);
 });
 

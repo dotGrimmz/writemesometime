@@ -16,6 +16,10 @@ class WMSService {
   getAllUsersPosts(id) {
     return axios.get(`http://localhost:5000/wmsapp/${id}`);
   }
+
+  postUserMessage(body, id) {
+    return axios.post(`http://localhost:5000/wmsapp/newpost/${id}`, body);
+  }
 }
 
 export default WMSService;
