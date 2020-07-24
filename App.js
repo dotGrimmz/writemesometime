@@ -19,12 +19,23 @@ const App = () => {
     return first;
   };
 
+  const setUserLoggedInUserAvatarInitials = () => {
+    return userCredentials
+      ? setAvatarInitials(userCredentials.userName)
+      : setAvatarInitials("NAA");
+  };
+
   const Stack = createStackNavigator();
   const MaterialBottomTabs = createBottomTabNavigator();
   const createHomeStack = () => {
     return (
       <UserContext.Provider
-        value={{ userCredentials, setUserCredentials, setAvatarInitials }}
+        value={{
+          userCredentials,
+          setUserCredentials,
+          setAvatarInitials,
+          setUserLoggedInUserAvatarInitials,
+        }}
       >
         <MaterialBottomTabs.Navigator>
           <MaterialBottomTabs.Screen name="Home" component={HomeScreen} />
@@ -39,7 +50,14 @@ const App = () => {
   console.log(userCredentials);
   return (
     <NavigationContainer>
-      <UserContext.Provider value={{ userCredentials, setUserCredentials }}>
+      <UserContext.Provider
+        value={{
+          userCredentials,
+          setUserCredentials,
+          setUserLoggedInUserAvatarInitials,
+          setAvatarInitials,
+        }}
+      >
         <Stack.Navigator>
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen

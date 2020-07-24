@@ -12,9 +12,7 @@ const PostsScreen = (props) => {
 
   useEffect(() => {
     const fetchUserPosts = async () => {
-      console.log("this is the id", userCredentials._id);
       let response = await service.getAllUsersPosts(userCredentials._id);
-      console.log("all users posts", response.data);
       setUserPosts(response.data);
     };
     fetchUserPosts();
