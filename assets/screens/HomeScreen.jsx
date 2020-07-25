@@ -7,7 +7,7 @@ let service = new WMSService();
 
 const HomeScreen = (props) => {
   const [allPosts, setAllPosts] = useState([]);
-  const { setAvatarInitials, handleDate } = useContext(UserContext);
+  const { setAvatarInitials, handleDate, postSent } = useContext(UserContext);
 
   useEffect(() => {
     const fetchAllPosts = async () => {
@@ -15,7 +15,7 @@ const HomeScreen = (props) => {
       setAllPosts(response.data);
     };
     fetchAllPosts();
-  }, [service]);
+  }, [service, postSent]);
 
   return (
     <View>

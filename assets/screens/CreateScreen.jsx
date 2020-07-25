@@ -8,13 +8,15 @@ const service = new WMSService();
 
 const CreateScreen = (props) => {
   const { navigation } = props;
+  const [usersPost, setUsersPost] = useState("");
 
   const {
     userCredentials,
     setAvatarInitials,
     setUserLoggedInUserAvatarInitials,
+    setPostSent,
+    postSent,
   } = useContext(UserContext);
-  const [usersPost, setUsersPost] = useState("");
 
   const createUsersPost = () => {
     let message = {
@@ -27,20 +29,19 @@ const CreateScreen = (props) => {
 
     return message;
   };
-  createUsersPost();
+
   const submitPost = async () => {
     let userId = userCredentials._id;
     try {
       let response = await service.postUserMessage(createUsersPost(), userId);
       response.status === 200
-        ? navigation.navigate("Home")
+        ? (setPostSent(!postSent), navigation.navigate("Home"))
         : alert("ERROR MESSAGE DID NOT SEND");
       console.log("post successful", response);
     } catch (err) {
       console.error(err);
     }
   };
-  console.log("users post:", usersPost);
   return (
     <View>
       <Text>This is the create Screen</Text>

@@ -13,6 +13,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { UserContext } from "./assets/context/UserContext";
 const App = () => {
   const [userCredentials, setUserCredentials] = useState();
+  const [postSent, setPostSent] = useState(false);
 
   const setAvatarInitials = (str) => {
     let first = str.charAt(0) + str.charAt(str.length - 1).toUpperCase();
@@ -43,6 +44,8 @@ const App = () => {
           setAvatarInitials,
           setUserLoggedInUserAvatarInitials,
           handleDate,
+          postSent,
+          setPostSent,
         }}
       >
         <MaterialBottomTabs.Navigator>
@@ -63,6 +66,8 @@ const App = () => {
           setUserCredentials,
           setUserLoggedInUserAvatarInitials,
           setAvatarInitials,
+          postSent,
+          setPostSent,
         }}
       >
         <Stack.Navigator>

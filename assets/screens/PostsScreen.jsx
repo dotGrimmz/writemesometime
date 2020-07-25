@@ -8,9 +8,12 @@ const service = new WMSService();
 
 const PostsScreen = (props) => {
   const [userPosts, setUserPosts] = useState([]);
-  const { setAvatarInitials, userCredentials, handleDate } = useContext(
-    UserContext
-  );
+  const {
+    setAvatarInitials,
+    userCredentials,
+    handleDate,
+    postSent,
+  } = useContext(UserContext);
 
   useEffect(() => {
     const fetchUserPosts = async () => {
@@ -18,7 +21,7 @@ const PostsScreen = (props) => {
       setUserPosts(response.data);
     };
     fetchUserPosts();
-  }, [service]);
+  }, [service, postSent]);
   return (
     <View>
       <Text> This is the User Posts Screen</Text>
