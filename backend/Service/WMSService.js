@@ -5,7 +5,12 @@ const mongoose = require("mongoose");
 class WMSService {
   getAllPosts(req, res) {
     WMSDomain.find()
-      .then((messages) => res.send(messages))
+      .then((posts) => {
+        let sortedByNewestPosts = posts.sort(
+          (a, b) => b.createdAt - a.createdAt
+        );
+        res.send(sortedByNewestPosts);
+      })
       .catch((err) => res.status(400).json("Error: " + err));
   }
 
@@ -38,7 +43,10 @@ class WMSService {
         });
       })
       .then(() => {
-        res.send(userPosts);
+        let sortedByNewestPosts = userPosts.sort(
+          (a, b) => b.createdAt - a.createdAt
+        );
+        res.send(sortedByNewestPosts);
       })
       .catch((err) => res.status(400).json("Error:" + err));
   }
@@ -58,8 +66,6 @@ class WMSService {
       liked,
       userKey,
     });
-
-    console.log(newMessage);
 
     newMessage
       .save()
