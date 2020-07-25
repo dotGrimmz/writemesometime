@@ -25,6 +25,13 @@ const App = () => {
       : setAvatarInitials("NAA");
   };
 
+  const handleDate = (date) => {
+    let year = date.slice(0, 4);
+    let month = date.slice(5, 7);
+    let day = date.slice(8, 10);
+    return `${month}-${day}-${year}`;
+  };
+
   const Stack = createStackNavigator();
   const MaterialBottomTabs = createBottomTabNavigator();
   const createHomeStack = () => {
@@ -35,6 +42,7 @@ const App = () => {
           setUserCredentials,
           setAvatarInitials,
           setUserLoggedInUserAvatarInitials,
+          handleDate,
         }}
       >
         <MaterialBottomTabs.Navigator>

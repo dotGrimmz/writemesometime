@@ -7,7 +7,7 @@ let service = new WMSService();
 
 const HomeScreen = (props) => {
   const [allPosts, setAllPosts] = useState([]);
-  const { setAvatarInitials } = useContext(UserContext);
+  const { setAvatarInitials, handleDate } = useContext(UserContext);
 
   useEffect(() => {
     const fetchAllPosts = async () => {
@@ -28,7 +28,7 @@ const HomeScreen = (props) => {
             avatarInitials={setAvatarInitials(item.userName)}
             userName={item.userName}
             message={item.message}
-            date={item.date}
+            date={handleDate(item.createdAt)}
             liked={item.liked}
             _id={item._id}
           />
