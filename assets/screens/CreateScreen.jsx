@@ -44,7 +44,6 @@ const CreateScreen = (props) => {
   };
   return (
     <View>
-      <Text>This is the create Screen</Text>
       <CreatePostComponent
         setAvatarInitials={setAvatarInitials}
         setUserLoggedInUserAvatarInitials={setUserLoggedInUserAvatarInitials}

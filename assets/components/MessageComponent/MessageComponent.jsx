@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TextInput, Text } from "react-native";
-import { Tooltip, Avatar, Icon, Card } from "react-native-elements";
+import { Tooltip, Avatar, Icon, Card, SocialIcon } from "react-native-elements";
 
 const MessageComponent = (props) => {
   const [userLike, setUserLike] = useState(false);
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   message: {
-    alignSelf: "center",
+    alignSelf: "baseline",
   },
   date: {
     fontSize: 8,
@@ -56,10 +56,11 @@ const styles = StyleSheet.create({
   },
   container: {
     width: "90%",
+    flex: 1,
     flexWrap: "nowrap",
     backgroundColor: "#e9d4b7",
     borderRadius: 15,
-    flexDirection: "column",
+    flexDirection: "row",
     borderWidth: 1,
     padding: 3,
     margin: 3,
@@ -68,6 +69,9 @@ const styles = StyleSheet.create({
   },
   likeBtn: {
     alignSelf: "center",
+  },
+  liked: {
+    alignSelf: "flex-end",
   },
 });
 

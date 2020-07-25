@@ -7,6 +7,8 @@ const RegisterScreen = (props) => {
   const { navigation } = props;
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setlastname] = useState("");
   const [failedClickCount, setFailedClickCount] = useState(0);
   const [passwordCheck, setPasswordCheck] = useState("");
   const [textValidation, setTextValidation] = useState(false);
@@ -15,23 +17,13 @@ const RegisterScreen = (props) => {
   );
   let service = new WMSService();
 
-  const firstStep = () => {
-    if (userName.length > 3) {
+  const checkTextErros = (text) => {
+    if (text.length > 3) {
       setTextValidation(true);
       resetCounter();
     } else {
       incrementOne();
       setTextValidation(false);
-    }
-  };
-
-  const secondStep = () => {
-    if (password.length > 3) {
-      setTextValidation(true);
-      resetCounter();
-    } else {
-      setTextValidation(false);
-      incrementOne();
     }
   };
 
@@ -65,11 +57,13 @@ const RegisterScreen = (props) => {
     let stateObj = {
       userName,
       password,
+      firstName,
+      lastName,
     };
 
     try {
       service.createNewUser(stateObj).then((response) => {
-        response.data.created
+        response.status === 200
           ? navigation.reset({
               index: 0,
               routes: [{ name: "Home" }],
@@ -99,9 +93,9 @@ const RegisterScreen = (props) => {
     <View style={{ flex: 1 }}>
       <ProgressSteps {...progressStepsStyle}>
         <ProgressStep
-          label="Choose a User Name"
+          label="User Name"
           errors={!textValidation}
-          onNext={() => firstStep()}
+          onNext={() => checkTextErros(userName)}
         >
           <View style={{ alignItems: "center" }}>
             <TextInput
@@ -118,12 +112,52 @@ const RegisterScreen = (props) => {
           </View>
         </ProgressStep>
         <ProgressStep
-          label="Create a Password"
-          onNext={() => secondStep()}
+          label="First Name"
+          errors={!textValidation}
+          onNext={() => checkTextErros(firstName)}
+        >
+          <View style={{ alignItems: "center" }}>
+            <TextInput
+              style={styles.userNameInput}
+              name="firstName"
+              onChangeText={(text) => setFirstName(text)}
+              value={firstName}
+            />
+            {failedClickCount > 2 && (
+              <Text style={styles.errorMessage}>
+                Needs to be longer then 4 letters
+              </Text>
+            )}
+          </View>
+        </ProgressStep>
+        <ProgressStep
+          label="Last Name"
+          errors={!textValidation}
+          onNext={() => checkTextErros(lastName)}
+        >
+          <View style={{ alignItems: "center" }}>
+            <TextInput
+              style={styles.userNameInput}
+              name="lastName"
+              onChangeText={(text) => setlastname(text)}
+              value={lastName}
+            />
+            {failedClickCount > 2 && (
+              <Text style={styles.errorMessage}>
+                Needs to be longer then 4 letters
+              </Text>
+            )}
+          </View>
+        </ProgressStep>
+        <ProgressStep
+          label="Password"
+          onNext={() => checkTextErros(password)}
           errors={!textValidation}
         >
           <View style={{ alignItems: "center" }}>
             <TextInput
+              secureTextEntry={true}
+              password={true}
               style={styles.userNameInput}
               name="password"
               onChangeText={(text) => setPassword(text)}
@@ -143,6 +177,8 @@ const RegisterScreen = (props) => {
         >
           <View style={{ alignItems: "center" }}>
             <TextInput
+              secureTextEntry={true}
+              password={true}
               style={styles.userNameInput}
               name="passwordCheck"
               onChangeText={(text) => setPasswordCheck(text)}

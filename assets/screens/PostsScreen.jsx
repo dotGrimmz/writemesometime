@@ -24,7 +24,6 @@ const PostsScreen = (props) => {
   }, [service, postSent]);
   return (
     <View>
-      <Text> This is the User Posts Screen</Text>
       <FlatList
         data={userPosts}
         keyExtractor={(item) => item._id}
