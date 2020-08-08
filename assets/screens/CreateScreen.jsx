@@ -32,6 +32,8 @@ const CreateScreen = (props) => {
 
   const submitPost = async () => {
     let userId = userCredentials._id;
+    console.log("user credentials on a new user", userCredentials);
+    // console.log("users id", userCredentials._id);
     try {
       let response = await service.postUserMessage(createUsersPost(), userId);
       response.status === 200

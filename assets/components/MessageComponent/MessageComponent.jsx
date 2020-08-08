@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TextInput, Text } from "react-native";
-import { Tooltip, Avatar, Icon, Card, SocialIcon } from "react-native-elements";
+import { Tooltip, Avatar, Icon } from "react-native-elements";
 
 const MessageComponent = (props) => {
   const [userLike, setUserLike] = useState(false);
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   avatar: {},
   dateCreated: {
     alignSelf: "flex-end",
-    flexDirection: "row",
+    flexDirection: "column",
   },
   message: {
     alignSelf: "baseline",

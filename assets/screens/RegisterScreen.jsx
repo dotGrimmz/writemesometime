@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import { ProgressSteps, ProgressStep } from "react-native-progress-steps";
 import WMSService from "../service/WMSService";
+import { UserContext } from "../context/UserContext";
 
 const RegisterScreen = (props) => {
   const { navigation } = props;
@@ -16,6 +17,7 @@ const RegisterScreen = (props) => {
     !textValidation
   );
   let service = new WMSService();
+  const { setUserCredentials } = useContext(UserContext);
 
   const checkTextErros = (text) => {
     if (text.length > 3) {
@@ -63,12 +65,19 @@ const RegisterScreen = (props) => {
 
     try {
       service.createNewUser(stateObj).then((response) => {
-        response.status === 200
-          ? navigation.reset({
-              index: 0,
-              routes: [{ name: "Home" }],
-            })
-          : alert(response.data.message);
+        if (response.status === 200) {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Home" }],
+          });
+          console.log(
+            "this is the reponse after creating a new user",
+            response
+          );
+          setUserCredentials(response.data);
+        } else {
+          alert(response.data.message);
+        }
       });
     } catch (error) {
       console.error(error);
