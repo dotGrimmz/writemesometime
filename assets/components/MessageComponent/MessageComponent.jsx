@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TextInput, Text } from "react-native";
-import { Tooltip, Avatar, Icon } from "react-native-elements";
+import { Tooltip, Avatar, Icon, Card } from "react-native-elements";
 
 const MessageComponent = (props) => {
   const [userLike, setUserLike] = useState(false);
